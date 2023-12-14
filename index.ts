@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { calculateContributors } from './calculateContributors'; // This will be your custom function
+import { calculateContributors } from './calculateContributors';
 
 const program = new Command();
 
@@ -8,8 +8,9 @@ program.version('1.0.0').description('CLI to gather metrics on cross collaborati
 program
   .command('analyze <repositoryPath>')
   .description('Analyze the specified git repository')
-  .action((repositoryPath) => {
-    calculateContributors(repositoryPath)
+  .option('-n, --num-commits <number>', 'Number of commits to analyze in each subfolder', '100')
+  .action((repositoryPath, options) => {
+    calculateContributors(repositoryPath, options.numCommits)
       .then((count: any) => {
         console.log(`Number of contributors who worked on multiple projects: ${count}`);
       })
