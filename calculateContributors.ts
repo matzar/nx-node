@@ -34,10 +34,16 @@ export async function calculateContributors(repositoryPath: string, numCommits: 
 
     await updateReadme(repositoryPath, multiProjectContributors);
     return multiProjectContributors;
-  } catch (error: any) {
-    // Handle or throw the error
-    console.error('Error:', error.message);
-    throw error; // or return a default value
+  } catch (error) {
+    // Asserting that error is of type Error
+    if (error instanceof Error) {
+      console.error('Error:', error.message);
+      throw error; // or return a default value
+    } else {
+      // Handle cases where the error is not an instance of Error
+      console.error('An unknown error occurred');
+      throw new Error('An unknown error occurred');
+    }
   }
 }
 
