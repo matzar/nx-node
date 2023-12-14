@@ -11,7 +11,7 @@ program
   .option('-n, --num-commits <number>', 'Number of commits to analyze in each subfolder', '100')
   .action((repositoryPath, options) => {
     calculateContributors(repositoryPath, options.numCommits)
-      .then((count: any) => {
+      .then((count: number) => {
         console.log(`Number of contributors who worked on multiple projects: ${count}`);
       })
       .catch((error: any) => {
